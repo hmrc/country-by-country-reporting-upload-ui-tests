@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "962371d4-cea9-4297-8d57-5b390eef9560",
+		"name": "CBC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth_Login",
+			"item": [
+				{
+					"name": "POST Auth Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = cheerio.load(pm.response.text());",
+									"var bearerToken = responseBody('td[data-session-id=\"authToken\"]').text().replace(\"Bearer\", \"\").replace(/\\s/g, \"\");",
+									"",
+									"pm.environment.set(\"bearer_token\", bearerToken);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"tests[\"Body does not contain: Bearer token not supplied\"] = responseBody !== \"Bearer token not supplied\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "authorityId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "redirectionUrl",
+									"value": "{{auth}}/auth-login-stub/session",
+									"type": "text"
+								},
+								{
+									"key": "credentialStrength",
+									"value": "weak",
+									"type": "text"
+								},
+								{
+									"key": "confidenceLevel",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "affinityGroup",
+									"value": "Individual",
+									"type": "text"
+								},
+								{
+									"key": "enrolment[0].state",
+									"value": "Activated",
+									"type": "text"
+								},
+								{
+									"key": "enrolment[0].name",
+									"value": "HMRC-CBC-ORG",
+									"type": "text"
+								},
+								{
+									"key": "enrolment[0].taxIdentifier[0].name",
+									"value": "cbcId",
+									"type": "text"
+								},
+								{
+									"key": "enrolment[0].taxIdentifier[0].value",
+									"value": "XACBC0000123778",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{auth}}/auth-login-stub/gg-sign-in",
+							"host": [
+								"{{auth}}"
+							],
+							"path": [
+								"auth-login-stub",
+								"gg-sign-in"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CBC Subscription",
+			"item": [
+				{
+					"name": "UpdateSubscriptionCBC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"IDType\": \"SAFE\",\n    \"IDNumber\": \"XACBC0000123777\",\n    \"tradingName\": \"Trading Name\",\n    \"isGBUser\": true,\n    \"primaryContact\": {\n        \"organisation\": {\n            \"organisationName\": \"orgName1\"\n        },\n        \"email\": \"test2@email.com\",\n        \"phone\": \"+4411223344\"\n    },\n    \"secondaryContact\": {\n        \"organisation\": {\n            \"organisationName\": \"orgName2\"\n        },\n        \"email\": \"test2@email.com\",\n        \"phone\": \"+441122334455\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cbc_backend}}/subscription/update-subscription",
+							"host": [
+								"{{cbc_backend}}"
+							],
+							"path": [
+								"subscription",
+								"update-subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReadSubscriptionCBC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cbc_backend}}/subscription/read-subscription",
+							"host": [
+								"{{cbc_backend}}"
+							],
+							"path": [
+								"subscription",
+								"read-subscription"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": []
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
