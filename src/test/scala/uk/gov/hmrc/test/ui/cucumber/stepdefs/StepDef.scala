@@ -36,7 +36,7 @@ class StepDef extends BaseStepDef {
   Then("""^I navigate to (.*) page$""") { page: String =>
     page match {
       case "details" =>
-        Nav.navigateTo("http://localhost:10024/country-by-country-reporting-frontend/change-contact/details")
+        Nav.navigateTo("http://localhost:10024/send-a-country-by-country-report/change-contact/details")
     }
   }
 
