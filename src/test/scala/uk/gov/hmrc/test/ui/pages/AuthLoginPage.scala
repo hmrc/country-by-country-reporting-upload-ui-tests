@@ -29,14 +29,26 @@ object AuthLoginPage extends BasePage {
   val identifierNameField      = "enrolment[0].taxIdentifier[0].name"
   val identifierNameValue      = "cbcId"
   val identifierValueField     = "enrolment[0].taxIdentifier[0].value"
-  val identifierValue          = "XACBC0000123778"
+  val identifierValueNew       = "XACBC0000123778"
+  val identifierValueOld       = "XACBC0000123777"
 
   def loginWithNewUserUpload(name: String): Unit = {
     Nav.navigateTo(url)
     Input.sendKeysByName(uploadUrl, redirectUrlField)
     Input.sendKeysByName(enrolmentKeyFieldValue, enrolmentKeyField)
     Input.sendKeysByName(identifierNameValue, identifierNameField)
-    Input.sendKeysByName(identifierValue, identifierValueField)
+    Input.sendKeysByName(identifierValueNew, identifierValueField)
+    selectAffinityGroupOrg()
+    clickSubmitButton
+  }
+
+  def loginWithOldUserUpload(name: String): Unit = {
+    Nav.navigateTo(url)
+    Input.sendKeysByName(uploadUrl, redirectUrlField)
+    Input.sendKeysByName(enrolmentKeyFieldValue, enrolmentKeyField)
+    Input.sendKeysByName(identifierNameValue, identifierNameField)
+    Input.sendKeysByName(identifierValueOld, identifierValueField)
+    selectAffinityGroupOrg()
     clickSubmitButton
   }
 
