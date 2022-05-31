@@ -75,27 +75,7 @@
                 },
                 {
                   "key": "affinityGroup",
-                  "value": "Individual",
-                  "type": "text"
-                },
-                {
-                  "key": "enrolment[0].state",
-                  "value": "Activated",
-                  "type": "text"
-                },
-                {
-                  "key": "enrolment[0].name",
-                  "value": "HMRC-CBC-ORG",
-                  "type": "text"
-                },
-                {
-                  "key": "enrolment[0].taxIdentifier[0].name",
-                  "value": "cbcId",
-                  "type": "text"
-                },
-                {
-                  "key": "enrolment[0].taxIdentifier[0].value",
-                  "value": "XACBC0000123778",
+                  "value": "Organisation",
                   "type": "text"
                 }
               ]
