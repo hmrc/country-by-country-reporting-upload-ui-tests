@@ -75,7 +75,7 @@
 								},
 								{
 									"key": "affinityGroup",
-									"value": "Individual",
+									"value": "Organisation",
 									"type": "text"
 								},
 								{
@@ -239,69 +239,6 @@
 							"path": [
 								"subscription",
 								"read-subscription"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "RegisterWithoutId",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"registerWithoutIDRequest\": {\n        \"requestCommon\": {\n            \"receiptDate\": \"\",\n            \"regime\": \"CBC\",\n            \"acknowledgementReference\": \"\"\n        },\n        \"requestDetail\": {\n            \"organisation\": {\n                \"organisationName\": \"organisation\"\n            },\n            \"address\": {\n                \"addressLine1\": \"\",\n                \"addressLine3\": \"\",\n                \"countryCode\": \"GB\"\n            },\n            \"contactDetails\": {}\n        }\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{register_cbc_backend}}/registration/noId",
-							"host": [
-								"{{register_cbc_backend}}"
-							],
-							"path": [
-								"registration",
-								"noId"
 							]
 						}
 					},
