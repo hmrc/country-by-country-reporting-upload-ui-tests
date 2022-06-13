@@ -49,7 +49,7 @@ Feature: Contact Details
     Then The Page should include No
     When click Confirm and send
     Then The Heading should be Contact details updated
-    Then I click Back to report cross-border arrangements
+    Then I click Back to send a CBC report
     # Then The heading should be X
 
   Scenario: 2 - Old user provides 2 contacts
@@ -109,5 +109,5 @@ Feature: Contact Details
     Then The Page should include  01632 960 001
     When click Confirm and send
     Then The Heading should be Contact details updated
-    Then I click Back to report cross-border arrangements
+    Then I click Back to send a CBC report
     # Then The heading should be X
