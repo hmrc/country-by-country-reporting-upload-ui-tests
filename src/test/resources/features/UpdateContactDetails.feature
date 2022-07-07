@@ -1,10 +1,10 @@
 @tests @ZAP
 Feature: Contact Details
 
-  Scenario: 1 - New user changes contact details
-    Given New User logs in to access file upload page
-    Then I navigate to details page
-    # remove navigation above when link available
+  Scenario: 1 - Existing user  contact details
+    Given Existing User logs in to access file upload page
+    Then The Heading should be Report cross-border arrangements for CBC
+    And I click change your contact details
     Then The Heading should be Contact details at your organisation
     Then click contact-name element
     Then The Heading should be Who can we contact if we have questions about your reports?
@@ -50,10 +50,10 @@ Feature: Contact Details
     When click Confirm and send
     Then The Heading should be Contact details updated
     Then I click Back to send a CBC report
-    # Then The heading should be X
+    Then The Heading should be Report cross-border arrangements for CBC
 
-  Scenario: 2 - Old user provides 2 contacts
-    Given Old User logs in to access file upload page
+  Scenario: 2 - New user to cbc online -  provides 2 contacts
+    Given New User logs in to access file upload page
     Then The Heading should be We need your contact details
     And click Continue button
     Then The Heading should be Who can we contact if we have questions about your reports?
@@ -86,8 +86,8 @@ Feature: Contact Details
     When click Confirm and send
     Then The Heading should be Contact details updated
 
-  Scenario: 3 - Old user provides 1 contact
-    Given Old User logs in to access file upload page
+  Scenario: 3 - New user to cbc online - provides 1 contact
+    Given New User logs in to access file upload page
     Then The Heading should be We need your contact details
     And click Continue button
     Then The Heading should be Who can we contact if we have questions about your reports?
@@ -110,4 +110,4 @@ Feature: Contact Details
     When click Confirm and send
     Then The Heading should be Contact details updated
     Then I click Back to send a CBC report
-    # Then The heading should be X
+    Then The Heading should be Report cross-border arrangements for CBC

@@ -25,8 +25,8 @@ class StepDef extends BaseStepDef {
 
   Given("""^(.*) logs in to access file upload page$""") { name: String =>
     name match {
-      case "New User" => AuthLoginPage.loginWithNewUserUpload(name)
-      case "Old User" => AuthLoginPage.loginWithOldUserUpload(name)
+      case "New User"      => AuthLoginPage.loginWithNewUserUpload(name)
+      case "Existing User" => AuthLoginPage.loginWithOldUserUpload(name)
     }
   }
 
