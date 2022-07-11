@@ -52,7 +52,7 @@ Feature: Contact Details
     Then I click Back to send a CBC report
     Then The Heading should be Report cross-border arrangements for CBC
 
-  Scenario: 2 - Existing 1 contacts user adds second contact details
+  Scenario: 2 - Existing 1 contact user adds second contact details
     Given Existing User with 1 contact logs in to access file upload page
     Then The Heading should be Report cross-border arrangements for CBC
     And I click change your contact details
