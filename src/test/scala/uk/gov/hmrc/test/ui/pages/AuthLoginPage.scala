@@ -21,16 +21,17 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.cucumber.{Find, Input, Nav, Wait}
 
 object AuthLoginPage extends BasePage {
-  val url: String              = TestConfiguration.url("auth-login-stub") + "/gg-sign-in"
-  val redirectUrlField: String = "redirectionUrl"
-  val uploadUrl: String        = TestConfiguration.url("country-by-country-reporting-frontend")
-  val enrolmentKeyField        = "enrolment[0].name"
-  val enrolmentKeyFieldValue   = "HMRC-CBC-ORG"
-  val identifierNameField      = "enrolment[0].taxIdentifier[0].name"
-  val identifierNameValue      = "cbcId"
-  val identifierValueField     = "enrolment[0].taxIdentifier[0].value"
-  val identifierValueNew       = "XACBC0000123777"
-  val identifierValueExisting  = "XACBC0000123778"
+  val url: String                          = TestConfiguration.url("auth-login-stub") + "/gg-sign-in"
+  val redirectUrlField: String             = "redirectionUrl"
+  val uploadUrl: String                    = TestConfiguration.url("country-by-country-reporting-frontend")
+  val enrolmentKeyField                    = "enrolment[0].name"
+  val enrolmentKeyFieldValue               = "HMRC-CBC-ORG"
+  val identifierNameField                  = "enrolment[0].taxIdentifier[0].name"
+  val identifierNameValue                  = "cbcId"
+  val identifierValueField                 = "enrolment[0].taxIdentifier[0].value"
+  val identifierValueNew                   = "XACBC0000123777"
+  val identifierValueExistingWith2contacts = "XACBC0000123778"
+  val identifierValueExistingWith1contact  = "XACBC0000123779"
 
   def loginWithNewUserUpload(name: String): Unit = {
     Nav.navigateTo(url)
@@ -42,12 +43,22 @@ object AuthLoginPage extends BasePage {
     clickSubmitButton
   }
 
-  def loginWithOldUserUpload(name: String): Unit = {
+  def loginWithOldUserUploadWith2Contacts(name: String): Unit = {
     Nav.navigateTo(url)
     Input.sendKeysByName(uploadUrl, redirectUrlField)
     Input.sendKeysByName(enrolmentKeyFieldValue, enrolmentKeyField)
     Input.sendKeysByName(identifierNameValue, identifierNameField)
-    Input.sendKeysByName(identifierValueExisting, identifierValueField)
+    Input.sendKeysByName(identifierValueExistingWith2contacts, identifierValueField)
+    selectAffinityGroupOrg()
+    clickSubmitButton
+  }
+
+  def loginWithOldUserUploadWith1Contact(name: String): Unit = {
+    Nav.navigateTo(url)
+    Input.sendKeysByName(uploadUrl, redirectUrlField)
+    Input.sendKeysByName(enrolmentKeyFieldValue, enrolmentKeyField)
+    Input.sendKeysByName(identifierNameValue, identifierNameField)
+    Input.sendKeysByName(identifierValueExistingWith1contact, identifierValueField)
     selectAffinityGroupOrg()
     clickSubmitButton
   }
